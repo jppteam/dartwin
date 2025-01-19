@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 class Header extends StatelessWidget {
@@ -16,7 +18,7 @@ class Header extends StatelessWidget {
         SelectableText.rich(
           TextSpan(
             text: 'Почему 2025 это очередной год дарт победы?',
-            style: Theme.of(context).textTheme.bodyMedium,
+            style: Theme.of(context).textTheme.bodySmall,
             children: const [
               TextSpan(text: '\n1. Дарт победа'),
               TextSpan(
@@ -31,7 +33,44 @@ class Header extends StatelessWidget {
             ],
           ),
         ),
+        const YearsText(),
       ],
     );
+  }
+}
+
+class YearsText extends StatefulWidget {
+  const YearsText({super.key});
+
+  @override
+  State<YearsText> createState() => _YearsTextState();
+}
+
+class _YearsTextState extends State<YearsText> {
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<void>(
+        stream: Stream.periodic(const Duration(seconds: 1)),
+        builder: (context, snapshot) {
+          return SelectableText.rich(
+            TextSpan(
+              text: 'ДАРТ ПОБЕДА УЖЕ',
+              style: Theme.of(context).textTheme.bodyMedium,
+              children: [
+                TextSpan(
+                  text:
+                      ' ${(DateTime.now().difference(DateTime(2011, 10, 10)).inSeconds / 31536000).toStringAsFixed(8)} ',
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium
+                      ?.copyWith(color: Colors.red),
+                ),
+                const TextSpan(
+                  text: 'ЛЕТ',
+                ),
+              ],
+            ),
+          );
+        });
   }
 }

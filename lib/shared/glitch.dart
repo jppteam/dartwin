@@ -7,7 +7,10 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 class GlitchEffect extends StatefulWidget {
-  const GlitchEffect({Key? key, this.child}) : super(key: key);
+  const GlitchEffect({
+    super.key,
+    this.child,
+  });
 
   final Widget? child;
 

@@ -25,21 +25,26 @@ class MyApp extends StatelessWidget {
             fontSize: 40,
           ),
           bodyMedium: TextStyle(
+            fontWeight: FontWeight.w800,
+            color: Colors.white,
+            fontSize: 24,
+          ),
+          bodySmall: TextStyle(
             fontWeight: FontWeight.w400,
             color: Colors.white,
             fontSize: 16,
           ),
         ),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
+  const MyHomePage({
+    super.key,
+  });
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -82,7 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 const SizedBox(height: 20),
                 const GlitchEffect(child: Header()),
                 const Spacer(),
-                RowOfDashes(x: x, y: y),
+                RowOfDashes(key: const ValueKey('rowOfDashes'), x: x, y: y),
                 const Spacer(),
                 const GifBoard(),
                 const SizedBox(
