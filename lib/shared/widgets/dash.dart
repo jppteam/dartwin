@@ -7,6 +7,7 @@ class Dash extends StatefulWidget {
   final double dy;
   final Size screenSize;
   final bool? isLeft;
+  final Flutter3DController controller;
 
   const Dash({
     super.key,
@@ -14,6 +15,7 @@ class Dash extends StatefulWidget {
     required this.dy,
     required this.screenSize,
     this.isLeft = false,
+    required this.controller,
   });
 
   @override
@@ -21,19 +23,17 @@ class Dash extends StatefulWidget {
 }
 
 class _DashState extends State<Dash> {
-  final Flutter3DController controller = Flutter3DController();
-
   @override
   void initState() {
     super.initState();
 
-    controller.onModelLoaded.addListener(() async {
-      debugPrint('model is loaded : ${controller.onModelLoaded.value}');
-      controller.setCameraOrbit(20, 70, 100);
+    widget.controller.onModelLoaded.addListener(() async {
+      debugPrint('model is loaded : ${widget.controller.onModelLoaded.value}');
+      widget.controller.setCameraOrbit(20, 70, 100);
 
-      final animations = await controller.getAvailableAnimations();
+      final animations = await widget.controller.getAvailableAnimations();
 
-      controller.playAnimation(animationName: animations.first);
+      widget.controller.playAnimation(animationName: animations.first);
     });
   }
 
@@ -42,6 +42,7 @@ class _DashState extends State<Dash> {
     super.didUpdateWidget(oldWidget);
 
     if (!mounted) return;
+    if (widget.controller.onModelLoaded.value == false) return;
 
     if (oldWidget.dx != widget.dx || oldWidget.dy != widget.dy) {
       final quarterWidth = widget.screenSize.width / 4;
@@ -61,7 +62,7 @@ class _DashState extends State<Dash> {
       final normalizedY = widget.dy / widget.screenSize.height;
       final phi = 180 - (normalizedY * 180);
 
-      controller.setCameraOrbit(theta, phi, 100);
+      widget.controller.setCameraOrbit(theta, phi, 100);
     }
   }
 
@@ -72,7 +73,7 @@ class _DashState extends State<Dash> {
       child: Flutter3DViewer(
         enableTouch: false,
         src: 'assets/flutter_dash.glb',
-        controller: controller,
+        controller: widget.controller,
         progressBarColor: Colors.transparent,
       ),
     );
