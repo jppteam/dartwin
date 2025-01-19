@@ -63,6 +63,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
+
     return MouseRegion(
       onHover: _updateLocation,
       child: Scaffold(
@@ -80,20 +82,29 @@ class _MyHomePageState extends State<MyHomePage> {
             Alignment.topLeft,
           ],
           child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              spacing: 20,
-              children: <Widget>[
-                const SizedBox(height: 20),
-                const GlitchEffect(child: Header()),
-                const Spacer(),
-                RowOfDashes(key: const ValueKey('rowOfDashes'), x: x, y: y),
-                const Spacer(),
-                const GifBoard(),
-                const SizedBox(
-                  width: double.infinity,
-                  height: 50,
-                  child: CustomOverflowIndicator(),
+            child: Stack(
+              children: [
+                const Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  spacing: 20,
+                  children: <Widget>[
+                    SizedBox(height: 20),
+                    GlitchEffect(child: Header()),
+                    Spacer(),
+                    Spacer(),
+                    GifBoard(),
+                    SizedBox(
+                      width: double.infinity,
+                      height: 50,
+                      child: CustomOverflowIndicator(),
+                    ),
+                  ],
+                ),
+                Positioned(
+                  height: size.height,
+                  width: size.width,
+                  child: RowOfDashes(
+                      key: const ValueKey('rowOfDashes'), x: x, y: y),
                 ),
               ],
             ),
