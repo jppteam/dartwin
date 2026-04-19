@@ -12,7 +12,7 @@ class Header extends StatelessWidget {
       spacing: 20,
       children: [
         SelectableText(
-          '2025 ЭТО ОЧЕРЕДНОЙ ГОД ДАРТ ПОБЕДЫ',
+          '${DateTime.now().year} ЭТО ОЧЕРЕДНОЙ ГОД ДАРТ ПОБЕДЫ',
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.bodyLarge,
         ),
