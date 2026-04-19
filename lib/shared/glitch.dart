@@ -179,6 +179,7 @@ class GlitchController extends Animation<int?>
 
   Duration? duration;
   List<Timer> _timers = [];
+  @override
   bool isAnimating = false;
 
   forward() {
