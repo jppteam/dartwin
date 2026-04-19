@@ -13,9 +13,11 @@ class Header extends StatelessWidget {
       children: [
         SelectableText(
           '2025 ЭТО ОЧЕРЕДНОЙ ГОД ДАРТ ПОБЕДЫ',
+          textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.bodyLarge,
         ),
         SelectableText.rich(
+          textAlign: TextAlign.center,
           TextSpan(
             text: 'Почему 2025 это очередной год дарт победы?',
             style: Theme.of(context).textTheme.bodySmall,
@@ -53,6 +55,7 @@ class _YearsTextState extends State<YearsText> {
         stream: Stream.periodic(const Duration(seconds: 1)),
         builder: (context, snapshot) {
           return SelectableText.rich(
+            textAlign: TextAlign.center,
             TextSpan(
               text: 'ДАРТ ПОБЕДА УЖЕ',
               style: Theme.of(context).textTheme.bodyMedium,
